@@ -1,3 +1,8 @@
+<?php	
+    include('status.php');
+    include('advsearch.php');
+?>
+
 <!doctype html>
 <html class="no-js" lang=""> 
     
@@ -30,9 +35,10 @@
    
 		<div id="menu">
 				<ul>
-					<li><a href="modify.html">Modify</a></li>
-					<li><a href="advancedsearch.html">Advanced Search</a></li> 
-          <li><a href="advancedflights.html">Advanced Flights</a></li> 
+                    <li><a href="modify.php">Modify</a></li>
+                    <li><a href="advancedsearch.html">Advanced Search</a></li> 
+                    <li><a href="advancedflights.html">Advanced Flights</a></li>
+                    <li><a href="logout.php">Logout</a></li>					      
 				</ul>
 		</div>
 	</div>
@@ -41,33 +47,45 @@
 	<div id="contact">
      
 		<p>ADVANCED SEARCH</p>
-		<form>
+        
+        <form method="POST" action="">
      
 			<div id="edit">
- <p style="text-align: left;">Search Aircraft</p>
- <label>Tail Number: </label><input type="text" input="text">
- </div>
- <div id="edit">
- <p style="text-align: left;">Search Crew </p>
- <label>Crew Id: </label><input type="text" input="text">
- </div>
-  <div id="edit">
-  <p style="text-align: left;">Search Cargo</p>
- <label>Cargo Origin:</label>
-  <select name="airports">
-  <option value="nyc"><p> New York (NYC), USA</option>
-</select> 
- </div>
- <div id="edit">
- <label>Cargo Destination:</label>
-  <select name="airports">
-  <option value="nyc"><p> New York (NYC), USA</option>
-</select> 
- </div>
-			<div id="submit">
-				<input type="submit" name="submit"
-				value="Search">
-			</div>
+     <p style="text-align: left;">Search Aircraft</p>
+     <label>Tail Number: </label><input type="text" name="tail_num">
+
+
+        </div>
+
+     <div id="edit">
+     <p style="text-align: left;">Search Crew </p>
+     <label>Crew Id: </label><input type="text" name="crew_id">
+
+     </div>
+
+      <div id="edit">
+      <p style="text-align: left;">Search Cargo</p>
+     <label>Cargo Origin:</label>
+      <select name="origin">
+      <option value="nyc"><p> New York (NYC), USA</option>
+    </select> 
+     </div>
+
+     <div id="edit">
+     <label>Cargo Destination:</label>
+      <select name="destination">
+      <option value="nyc"><p> New York (NYC), USA</option>
+    </select> 
+     </div>
+    
+    <div id = "msg">
+    <br>
+    <?php echo $msg; ?>
+    </div>  
+            
+    <div id="submit">
+        <input type="submit" name="search_cargo" value="Search">
+    </div>
 		</form>
    
 	</div>

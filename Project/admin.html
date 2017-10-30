@@ -1,3 +1,9 @@
+<?php
+	
+    include('status.php');
+
+?>
+
 <!doctype html>
 <html class="no-js" lang=""> 
    
@@ -32,11 +38,11 @@
 		</div>
    
 		<div id="menu">
-				<ul> 
-					<li><a href="modify.html">Modify</a></li>
-					<li><a href="advancedsearch.html">Advanced Search</a></li> 
-          <li><a href="advancedflights.html">Advanced Flights</a></li> 
-					      
+				<ul>
+                    <li><a href="modify.php">Modify</a></li>
+                    <li><a href="advancedsearch.html">Advanced Search</a></li> 
+                    <li><a href="advancedflights.html">Advanced Flights</a></li>
+                    <li><a href="logout.php">Logout</a></li>					      
 				</ul>
 		</div>
 	</div>
@@ -58,9 +64,16 @@
 	
 		</div>
 		<div id="feature-4">
+        <div id = "msg">
+            <br>
+            <?php echo "Welcome " . $_SESSION["username"] . "." ;?>
+            <br>
+            <br>
+        </div>
+            
 		<div id="COA">
-			<a href="index.html" class="button">
-				<span class="text"><h5>Back</h5></span>
+			<a href="logout.php" class="button">
+				<span class="text"><h5>Log out</h5></span>
 			</a>
       
 		</div>
