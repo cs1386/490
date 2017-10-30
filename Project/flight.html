@@ -14,7 +14,14 @@
  
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-
+    </head>
+    
+    <?php 
+        require('connect.php');
+        
+        $query = "SELECT * FROM `airport`";
+        $result = mysqli_query($link, $query);
+    ?>
   
        <div id="wrapper">
 	<div id="header">
@@ -46,18 +53,28 @@
 		<form>
      
 			<div id="form-1">
-        <h5>Origin</h5>
-				<select name="origin" required="">
-            <option value="nyc"><p> New York (NYC), USA </p></option>
-			      
-            </select>
+            <h5>Origin</h5>
+                
+                <select name="origin" required="">
+                    <?php
+                        while($row1 = mysqli_fetch_array($result)):;
+                    ?>
+                    <option value="<?php echo $row1[0];?>"> <?php echo $row1['Airport_Code'], ", ", $row1['Airport_Name'];?>
+                    </option>
+                    <?php endwhile;?>
+			    </select>
+                
 			</div>
 
 			<div id="form">
         <h5>Destination</h5>
 				<select name="origin" required="">
-            <option value="nyc"><p> New York (NYC), USA </p></option>
-			      
+                                <?php
+                        while($row1 = mysqli_fetch_array($result)):;
+                    ?>
+                    <option value="<?php echo $row1[0];?>"> <?php echo $row1['Airport_Code'], ", ", $row1['Airport_Name'];?>
+                    </option>
+                    <?php endwhile;?>
             </select>
 			</div>
 			<div id="submit">

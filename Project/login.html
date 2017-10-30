@@ -1,3 +1,9 @@
+<?php
+    
+    include('check_login.php');
+
+?>
+
 <!doctype html>
 <html class="no-js" lang=""> 
     
@@ -14,7 +20,10 @@
  
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-
+    </head>
+    
+    <body>
+        
   
        <div id="wrapper">
 	<div id="header">
@@ -42,20 +51,22 @@
 	
 	<div id="contact">
 		<p>Log In</p>
-		<form>
+		<form method="post" action="" name="login">
      
-			<div id="User">
-      <label>Username:</label><input type="text" input="text">
+            <div id="User">
+      <label>Username:</label><input type="text" name="username">
       </div>
       <div id="Password">
-      <label>Password:</label><input type="text" input="text">
+      <label>Password:</label><input type="password" name="pass">
       </div>
-      <div id="feature-4" style="width:100%">
-		<div id="COA">
-			<a href="admin.html" class="button">
-				<span class="text"><h5>Log In</h5></span>
-			</a>
-      </div>
+        <div id = "error">
+            <br>
+            <?php echo $msg;?>
+        </div>            
+         <div id="feature-4" style="width:100%">
+		<div id="submit">            
+            <input type="submit" name="submit2" value="Log in">
+        </div>
       </div>
       
 		</form>
