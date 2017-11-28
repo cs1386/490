@@ -1,96 +1,157 @@
+<?php	
+    
+    include('status.php');
+    include('connect.php');
+
+    $query = "SELECT Airport_Code FROM `airport`";
+    $result = mysqli_query($link, $query);
+?>
+
 <!doctype html>
 <html class="no-js" lang=""> 
     
-    <head> 
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
- 
-        <title>Wrong Way Airline</title>
-	
+        <title>Wrong Way Airline</title>	
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<link rel="icon" href="img/WWlogo.png">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="icon" href="img/WWlogo.png">
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
 
-  
-       <div id="wrapper">
-	<div id="header">
-		<div id="logo">
-     <div id = "lg"></div>
-		  <a href="index.html">
-		  <div id="name">Wrong Way</div></a>
-		
-		
-   
-		
-		</div>
-   
-		<div id="menu">
-				<ul>
-                    <li><a href="modify.php">Modify</a></li>
-                    <li><a href="advancedsearch.html">Advanced Search</a></li> 
-                    <li><a href="advancedflights.html">Advanced Flights</a></li>
-                    <li><a href="logout.php">Logout</a></li>					      
-				</ul>
-		</div>
-	</div>
-		
-	
-	<div id="contact">
-     
-		<p>FLIGHT DETAILS</p>
-		<form>
-   <div id ="edit">
-         <p style="text-align: left;">Flights Schedule</p>
-      <div id = "edit">
 
- <label>Flight Number: </label><input type="text" input="text">
- </div>
- <div id="edit">
- <label>Tail Number:</label><input type="text" input="text">
- </div>
- <div id="edit">
- <label>Air Crew:</label><input type="text" input="text">
- </div>
- <div id="edit">
- <label>From Airport:</label>
-  <select name="airports">
-  <option value="nyc"><p> New York (NYC), USA</option>
-</select> 
- </div>
- <div id="edit">
- <label>To Airport:</label>
-  <select name="airports">
-  <option value="nyc"><p> New York (NYC), USA</option>
-</select> 
- </div>
- <div id="edit">
- <label>Arrival Time:</label><input type="text" input="text">
- </div>
- <div id="edit">
- <label>Departure Time:</label><input type="text" input="text">
- </div>
+    </head>
+    
+    <body>
+  
+        <div id="wrapper">
+        <div id="header">
+            <div id="logo">
+                <div id = "lg"></div>
+                <a href="index.html">
+                <div id="name">Wrong Way</div></a>
+            </div>
+
+            <div id="menu">
+                    <ul>
+                        <li><a href="modify.php">Modify</a></li>
+                        <li><a href="advancedsearch.html">Advanced Search</a></li> 
+                        <li><a href="advancedflights.html">Advanced Flights</a></li>
+                        <li><a href="logout.php">Logout</a></li>					      
+                    </ul>
+            </div>
+        </div>
+
+
+        <div id="contact">
+
+            <p>FLIGHT DETAILS</p>
+
+            <form method="POST" action="advflights.php" name="flights">
+                <div id ="edit">
+                <p style="text-align: left;">Flights Schedule</p>
+
+                <div id = "edit">
+                <label>Flight Number: </label><input type="text" name="flight_num">
+                </div>
+
+                <div id="edit">
+                <label>Tail Number:</label><input type="text" name="tail_num">
+                </div>
+
+                <div id="edit">
+                <label>Air Crew:</label><input type="text" name="crew">
+                </div>
+
+                <div id="edit">
+                <label>From Airport:</label>
+                    
+                            <?php
+                            echo "<select name='origin'>";
+                                while($row1 = mysqli_fetch_array($result)){
+                            
+                            echo "<option value=" . $row1['Airport_Code'] . ">" . $row1['Airport_Code'] . "</option>";
+                                }
+                            echo "</select>";
+                            ?>
+                    
+                </div>
+
+                <div id="edit">
+                <label>To Airport:</label>
  
-			
-			<div id="submit">
-				<input type="submit" name="submit"
-				value="Flights">
-			</div>
-		</form>
-</div>
-   </div>
-	
-	<div id="footer">
-			<div id="footer-1">
-				<p>Copyright 2017 Wrong Way. All rights reserved.</p>
-	
-		
-		
-	</div>
-	</div>	
+                            <?php
+                            mysqli_data_seek($result, 0);
+                            echo "<select name='destination'>";
+                                while($row1 = mysqli_fetch_array($result)){
+                            
+                            echo "<option value=" . $row1['Airport_Code'] . ">" . $row1['Airport_Code'] . "</option>";
+                                }
+                            echo "</select>";
+                            ?>
+                    
+                </div>
+
+                <div id="edit">
+                <label>Departure Time:</label>
+                    <select name = dept_time>
+                        <?php
+                            
+                            // 24 hour time, 15 mins increment
+                            $start = "00:00";
+                            $end = "23:45";
+
+                            $tStart = strtotime($start);
+                            $tEnd = strtotime($end);
+                            $tNow = $tStart;
+
+                            while($tNow <= $tEnd){
+                              echo "<option value =" . date("H:i",$tNow) . ">" . date("H:i",$tNow) . "</option>\n";
+                              $tNow = strtotime('+15 minutes',$tNow);
+                            }
+
+                        ?>
+                    </select>
+                </div>
+
+                <div id="edit">
+
+                <label>Arrival Time:</label>
+                    <select name = arr_time>
+                        <?php
+                            
+                            // 24 hour time, 15 mins increment
+                            $start = "00:00";
+                            $end = "23:45";
+
+                            $tStart = strtotime($start);
+                            $tEnd = strtotime($end);
+                            $tNow = $tStart;
+
+                            while($tNow <= $tEnd){
+                              echo "<option value =" . date("H:i",$tNow) . ">" . date("H:i",$tNow) . "</option>\n";
+                              $tNow = strtotime('+15 minutes',$tNow);
+                            }
+
+                        ?>
+                    </select>
+                </div>
+
+                <div id="submit">
+                    <input type="submit" name="submit" value="Flights">
+                </div>
+                </div>
+
+            </form>
+
+        </div>
+
+        <div id="footer">
+            <div id="footer-1"><p>Copyright 2017 Wrong Way. All rights reserved.</p></div>
+        </div>
         
     </body>
+    
 </html>
