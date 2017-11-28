@@ -88,7 +88,7 @@
                                 echo "Origin and Destination required.";
                             }
                             else{
-                                $sql = "SELECT * FROM Airport_flights WHERE Origin='$origin' and Destination='#destination'";
+                                $sql = "SELECT * FROM Airport_Flights WHERE Origin='$origin' and Destination='#destination'";
                                 $result = mysqli_query($link, $sql);
 
                                 if(mysqli_num_rows($result)==0){
