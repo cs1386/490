@@ -17,7 +17,7 @@
 			$pass = $_POST['pass'];
             $_SESSION['login_user'] = $username;
 
-			$sql = "SELECT * FROM admin WHERE Username='$username' AND Password='$pass'";
+			$sql = "SELECT * FROM Admin WHERE Username='$username' AND Password='$pass'";
 			$result = mysqli_query($link, $sql);
 			//$row = mysqli_fetch_array($result);
 	

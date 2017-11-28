@@ -32,7 +32,7 @@
         // if no error
         if(!isset($msg)){
             
-            $query1 = "SELECT * FROM customer WHERE Username = '$username'";
+            $query1 = "SELECT * FROM Customer WHERE Username = '$username'";
             $result1 = mysqli_query($link, $query);
             
             if(mysqli_num_rows($result1) > 0){

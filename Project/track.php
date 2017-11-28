@@ -63,17 +63,17 @@
                 if(empty($cargo_id)){
 
                     $msg = 'Cargo ID required.';
-                    echo $msg;
+                    echo "$msg <br><br>";
                 }
 
                 else{
                 // query database
 
-                    $sql = "SELECT * FROM cargo WHERE Cargo_ID='$cargo_id'";
+                    $sql = "SELECT * FROM Cargo WHERE Cargo_ID='$cargo_id'";
                     $result = mysqli_query($link, $sql);
                     
                     if(mysqli_num_rows($result)==0){
-                        echo "<p>No results.</p>";
+                        echo "No results. <br><br>";
                     }
                     else{
                         $row = mysqli_fetch_array($result);
